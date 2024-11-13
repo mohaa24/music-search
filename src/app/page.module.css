@@ -8,7 +8,7 @@
   min-height: 100vh;
 }
 
-.searchContainer{
+.searchContainer {
   padding: 25px 0;
 }
 
@@ -26,7 +26,6 @@
   padding: 20px;
 }
 
-
 /* Card Container----------- */
 
 .resultsContainer {
@@ -35,27 +34,68 @@
   align-items: center;
   padding: 20px;
 }
-.backBtnCtr{
+.backBtnCtr {
   width: 100%;
   padding: 0 20px;
 }
-.backBtn{
-padding: 5px;
+.backBtn {
+  padding: 5px;
 }
-.searchButton{
+.searchButton {
   padding: 5px;
   margin-left: 10px;
   font-size: 15px;
 }
-.searchTerm{
+.searchTerm {
   padding: 5px;
   font-size: 15px;
-
 }
 .results {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 20px;
   width: 100%;
-  max-width: 1200px; 
+  max-width: 1200px;
+}
+.loading {
+  display: flex;
+  flex-direction: unset;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .main h1{
+    padding: 20px;
+  }
+  .backBtnCtr {
+  padding: 10px 20px;
+}
+  .page{
+    padding: 10px;
+  }
+  .results {
+    grid-template-columns: 1fr; /* One column on mobile */
+  }
+
+  .cardContainer {
+    flex-direction: column; /* Stack image and info vertically */
+    align-items: flex-start; /* Align content to the start */
+    text-align: center;
+    padding: 15px;
+  }
+
+  .thumbnail {
+    margin-bottom: 10px; /* Space between image and text on mobile */
+    margin-right: 0;
+  }
+
+  .info {
+    align-items: center;
+  }
+
+  .infoItem {
+    font-size: 16px; /* Slightly larger text for readability on smaller screens */
+  }
 }

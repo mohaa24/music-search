@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styles from "./page.module.css";
 import Card from "./components/card/card";
+import Spinner from "./components/spinner/spinner";
 
 export type TSearchItem = {
   artistName: string;
@@ -22,7 +23,9 @@ type TData = {
 export default function Home() {
   const [searchString, setSearchString] = useState("jack");
   const [data, setData] = useState<null | TData>(null);
-  const [pageState, setPageState] = useState<"results" | "search">("search");
+  const [pageState, setPageState] = useState<"results" | "search" | "loading">(
+    "search"
+  );
 
   const getData = async (string: string) => {
     try {
@@ -35,14 +38,17 @@ export default function Home() {
       }
       const dataJSON = await response.json();
       setData(dataJSON);
+      setPageState('results')
     } catch (error) {
       console.error(error); // other errors
     }
   };
 
+
+  
   const onSearch = () => {
     getData(searchString);
-    setPageState("results");
+    setPageState("loading");
   };
 
   const onType = (string: string) => {
@@ -53,11 +59,24 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <h1 className="">iTunes Search</h1>
-        {pageState === 'results' && <div className={styles.backBtnCtr}>
-          <button className={styles.backBtn}
-          onClick={()=>{setPageState('search')}}
-          > Back to search</button>
-        </div>}
+        {pageState === "results" && (
+          <div className={styles.backBtnCtr}>
+            <button
+              className={styles.backBtn}
+              onClick={() => {
+                setPageState("search");
+              }}
+            >
+              {" "}
+              Back to search
+            </button>
+          </div>
+        )}
+        {pageState === "loading" && (
+          <div className={styles.loading}>
+            Loading... <Spinner size={20} />
+          </div>
+        )}
         {pageState === "search" && (
           <div className={styles.searchContainer}>
             <div className={styles.wrap}>
