@@ -45,7 +45,6 @@ export default function Home() {
   };
 
 
-  
   const onSearch = () => {
     getData(searchString);
     setPageState("loading");
