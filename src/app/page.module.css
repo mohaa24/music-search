@@ -18,6 +18,9 @@
   justify-content: center;
   align-items: center;
 }
+.main h1{
+  margin-bottom: 20px;
+}
 
 .resultsContainer {
   display: flex;

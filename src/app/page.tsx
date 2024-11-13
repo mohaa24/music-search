@@ -75,6 +75,11 @@ export default function Home() {
             Loading... <Spinner size={20} />
           </div>
         )}
+         {data && data.results && pageState === 'results' && data.results.length === 0 && (
+                <div className={styles.loading}>
+                 No Results! 
+                </div>
+              )}
         {pageState === "search" && (
           <div className={styles.searchContainer}>
             <div className={styles.wrap}>
@@ -106,12 +111,14 @@ export default function Home() {
             <div className={styles.results}>
               {data &&
                 data.results &&
+                data.results.length !== 0 &&
                 data.results.map((item: TSearchItem) => {
                   return (
                     // eslint-disable-next-line react/jsx-key
-                    <Card item={item}></Card>
+                    <Card item={item} key={item.trackId}></Card>
                   );
                 })}
+             
             </div>
           </div>
         )}
