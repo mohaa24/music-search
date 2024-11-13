@@ -1,7 +1,11 @@
 .page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 80px;
   gap: 64px;
   font-family: var(--font-geist-sans);
+  min-height: 100vh;
 }
 
 .searchContainer{
@@ -14,24 +18,28 @@
   justify-content: center;
   align-items: center;
 }
-.results {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-.cardContainer {
+
+.resultsContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 200px;
-  height: 300px;
-  border-radius: 3px;
-  background-color: grey;
-  padding: 10px;
+  padding: 20px;
 }
 
-.thumbnail img {
-  width: 150px;
+
+/* Card Container----------- */
+
+.resultsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px; 
 }

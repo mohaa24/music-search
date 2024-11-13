@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import styles from "./page.module.css";
+import Card from "./components/card/card";
 
 
-type TSearchItem = {
+export type TSearchItem = {
   artistName: string;
   trackName: string;
   collectionName: string;
@@ -22,6 +23,7 @@ type TData = {
 export default function Home() {
   const [searchString, setSearchString] = useState("jack");
   const [data, setData] = useState<null|TData>(null);
+  const [pageState ,setPageState]= useState<'results'|'search'>('search')
 
   const getData = async (string: string) => {
     try {
@@ -41,6 +43,7 @@ export default function Home() {
 
   const onSearch = () => {
     getData(searchString);
+    setPageState('results');
   };
 
   const onType = (string:string) => {
@@ -51,51 +54,44 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <h1 className="">iTunes Search</h1>
-        <div className={styles.searchContainer}>
-          <input
-            type="text"
-            value={searchString}
-            placeholder="search here.."
-            onChange={(event) => {
-              onType(event.target.value);
-            }}
-          />
-          <button
-            onClick={() => {
-              onSearch();
-            }}
-          >
-            {" "}
-            Search
-          </button>
-        </div>
 
-        <div className={styles.resultsContainer}>
+       { pageState === 'search' && <div className={styles.searchContainer}>
+          <div className={styles.wrap}>
+            <div className={styles.search}>
+              <input
+                type="text"
+                value={searchString}
+                placeholder="search here.."
+                onChange={(event) => {
+                  onType(event.target.value);
+                }}
+                className={styles.searchTerm}
+              />
+              <button
+                onClick={() => {
+                  onSearch();
+                }}
+                className={styles.searchButton}
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>}
+
+      {pageState === 'results' && <div className={styles.resultsContainer}>
           <div className={styles.results}>
             {data &&
               data.results &&
-              data.results.map((item:TSearchItem) => {
+              data.results.map((item: TSearchItem) => {
                 return (
-                  <div className={styles.cardContainer} key={item.trackId}>
-                    <div className={styles.thumbnail}>
-                      {/* <img src={item.artworkUrl60} /> */}
-                    </div>
-                    <div className={styles.info}>
-                      <div className={styles.infoItem}>
-                        Track Name :{item.trackName}
-                      </div>
-                      <div className={styles.infoItem}>
-                        Artist :{item.artistName}
-                      </div>
-                      <div className={styles.infoItem}>
-                        Album :{item.collectionName}
-                      </div>
-                    </div>
-                  </div>
+                  // eslint-disable-next-line react/jsx-key
+                  <Card item={item}></Card>
                 );
               })}
           </div>
-        </div>
+        </div>}
+        
       </main>
     </div>
   );
