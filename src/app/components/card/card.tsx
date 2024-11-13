@@ -16,11 +16,11 @@ const Card = ({item}:TProps):JSX.Element=>{
           ></div>
         </div>
         <div className={styles.info}>
-          <div className={styles.infoItem}>Track Name :{item.trackName}</div>
-          <div className={styles.infoItem}>Artist :{item.artistName}</div>
-          <div className={styles.infoItem}>Album :{item.collectionName}</div>
+          <div className={styles.infoItem}>Track Name :{item.trackName?item.trackName: ' ---'}</div>
+          <div className={styles.infoItem}>Artist :{item.artistName ? item.artistName: ' ---'}</div>
+          <div className={styles.infoItem}>Album :{item.collectionName ? item.collectionName: ' ---'}</div>
         </div>
       </div>
     );
 }
-export default Card
+export default Card;
