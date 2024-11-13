@@ -21,7 +21,7 @@ type TData = {
 };
 
 export default function Home() {
-  const [searchString, setSearchString] = useState("jack");
+  const [searchString, setSearchString] = useState("");
   const [data, setData] = useState<null | TData>(null);
   const [pageState, setPageState] = useState<"results" | "search" | "loading">(
     "search"
