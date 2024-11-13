@@ -35,7 +35,23 @@
   align-items: center;
   padding: 20px;
 }
+.backBtnCtr{
+  width: 100%;
+  padding: 0 20px;
+}
+.backBtn{
+padding: 5px;
+}
+.searchButton{
+  padding: 5px;
+  margin-left: 10px;
+  font-size: 15px;
+}
+.searchTerm{
+  padding: 5px;
+  font-size: 15px;
 
+}
 .results {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 

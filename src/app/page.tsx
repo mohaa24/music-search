@@ -3,7 +3,6 @@ import { useState } from "react";
 import styles from "./page.module.css";
 import Card from "./components/card/card";
 
-
 export type TSearchItem = {
   artistName: string;
   trackName: string;
@@ -12,18 +11,18 @@ export type TSearchItem = {
   artworkUrl30: string;
   artworkUrl60: string;
   artworkUrl100: string;
-  trackId:number;
-}; 
+  trackId: number;
+};
 
 type TData = {
-  resultCount:number
-  results:TSearchItem[]
-}
+  resultCount: number;
+  results: TSearchItem[];
+};
 
 export default function Home() {
   const [searchString, setSearchString] = useState("jack");
-  const [data, setData] = useState<null|TData>(null);
-  const [pageState ,setPageState]= useState<'results'|'search'>('search')
+  const [data, setData] = useState<null | TData>(null);
+  const [pageState, setPageState] = useState<"results" | "search">("search");
 
   const getData = async (string: string) => {
     try {
@@ -43,10 +42,10 @@ export default function Home() {
 
   const onSearch = () => {
     getData(searchString);
-    setPageState('results');
+    setPageState("results");
   };
 
-  const onType = (string:string) => {
+  const onType = (string: string) => {
     setSearchString(string);
   };
 
@@ -54,44 +53,51 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <h1 className="">iTunes Search</h1>
-
-       { pageState === 'search' && <div className={styles.searchContainer}>
-          <div className={styles.wrap}>
-            <div className={styles.search}>
-              <input
-                type="text"
-                value={searchString}
-                placeholder="search here.."
-                onChange={(event) => {
-                  onType(event.target.value);
-                }}
-                className={styles.searchTerm}
-              />
-              <button
-                onClick={() => {
-                  onSearch();
-                }}
-                className={styles.searchButton}
-              >
-                Search
-              </button>
+        {pageState === 'results' && <div className={styles.backBtnCtr}>
+          <button className={styles.backBtn}
+          onClick={()=>{setPageState('search')}}
+          > Back to search</button>
+        </div>}
+        {pageState === "search" && (
+          <div className={styles.searchContainer}>
+            <div className={styles.wrap}>
+              <div className={styles.search}>
+                <input
+                  type="text"
+                  value={searchString}
+                  placeholder="search here.."
+                  onChange={(event) => {
+                    onType(event.target.value);
+                  }}
+                  className={styles.searchTerm}
+                />
+                <button
+                  onClick={() => {
+                    onSearch();
+                  }}
+                  className={styles.searchButton}
+                >
+                  Search
+                </button>
+              </div>
             </div>
           </div>
-        </div>}
+        )}
 
-      {pageState === 'results' && <div className={styles.resultsContainer}>
-          <div className={styles.results}>
-            {data &&
-              data.results &&
-              data.results.map((item: TSearchItem) => {
-                return (
-                  // eslint-disable-next-line react/jsx-key
-                  <Card item={item}></Card>
-                );
-              })}
+        {pageState === "results" && (
+          <div className={styles.resultsContainer}>
+            <div className={styles.results}>
+              {data &&
+                data.results &&
+                data.results.map((item: TSearchItem) => {
+                  return (
+                    // eslint-disable-next-line react/jsx-key
+                    <Card item={item}></Card>
+                  );
+                })}
+            </div>
           </div>
-        </div>}
-        
+        )}
       </main>
     </div>
   );
