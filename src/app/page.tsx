@@ -38,12 +38,11 @@ export default function Home() {
       }
       const dataJSON = await response.json();
       setData(dataJSON);
-      setPageState('results')
+      setPageState("results");
     } catch (error) {
       console.error(error); // other errors
     }
   };
-
 
   const onSearch = () => {
     getData(searchString);

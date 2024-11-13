@@ -1,22 +1,22 @@
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 div.spinner {
-    --spinner-color: grey;
+  --spinner-color: grey;
 
-    border: 2px solid black;
-    border-top: 2px solid white;
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-    animation: spin 0.7s linear infinite;
-    flex-shrink: 0;
-    cursor: wait;
+  border: 2px solid black;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+  cursor: wait;
 }
